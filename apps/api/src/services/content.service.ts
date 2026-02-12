@@ -1,5 +1,5 @@
 import { contentData } from '../data/content.data';
-import { Content } from '@shared';
+import { Content } from '@content-dashboard/shared';
 import { ContentModel } from '../models/content.model';
 
 interface QueryParams {
