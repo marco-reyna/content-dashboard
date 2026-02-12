@@ -1,4 +1,4 @@
-export interface Content {
+export interface ContentModel {
   id: string;
   title: string;
   body: string;
