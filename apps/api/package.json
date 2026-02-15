@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
-    "format": "prettier --write ."
+    "dev": "ts-node-dev src/server.ts"
   },
   "keywords": [],
   "author": "",

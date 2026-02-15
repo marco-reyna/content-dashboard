@@ -44,9 +44,7 @@ describe('useContent', () => {
   });
 
   it('handles error state', async () => {
-    vi.spyOn(api, 'fetchContent').mockRejectedValue(
-      new Error('API Error'),
-    );
+    vi.spyOn(api, 'fetchContent').mockRejectedValue(new Error('API Error'));
 
     const { result } = renderHook(
       () =>

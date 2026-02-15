@@ -6,7 +6,8 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "npm run dev -w api & npm run dev -w web"
+    "dev": "npm run dev -w api & npm run dev -w web",
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.9.1",

@@ -1,6 +1,6 @@
-import { Router } from "express";
-import { z } from "zod";
-import { getContent } from "../services/content.service";
+import { Router } from 'express';
+import { z } from 'zod';
+import { getContent } from '../services/content.service';
 
 const router = Router();
 
@@ -10,11 +10,11 @@ const querySchema = z.object({
   search: z.string().optional(),
 });
 
-router.get("/", (req, res) => {
+router.get('/', (req, res) => {
   const parsed = querySchema.safeParse(req.query);
 
   if (!parsed.success) {
-    return res.status(400).json({ error: "Invalid query parameters" });
+    return res.status(400).json({ error: 'Invalid query parameters' });
   }
 
   const page = Number(parsed.data.page) || 1;

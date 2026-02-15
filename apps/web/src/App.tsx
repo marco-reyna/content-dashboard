@@ -12,7 +12,6 @@ export default function App() {
 
   const debouncedSearch = useDebounce(search, 400);
 
-
   useEffect(() => {
     setPage(1);
   }, [debouncedSearch]);
@@ -37,10 +36,7 @@ export default function App() {
           <ContentList items={data.data} />
 
           <div style={{ marginTop: 16 }}>
-            <button
-              disabled={page === 1}
-              onClick={() => setPage((p) => p - 1)}
-            >
+            <button disabled={page === 1} onClick={() => setPage((p) => p - 1)}>
               Previous
             </button>
 
