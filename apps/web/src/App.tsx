@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useContent } from './features/content/hooks/useContent';
 import { ContentList } from './features/content/components/ContentList';
 import { SearchInput } from './features/content/components/SearchInput';
@@ -11,6 +11,11 @@ export default function App() {
   const [search, setSearch] = useState('');
 
   const debouncedSearch = useDebounce(search, 400);
+
+
+  useEffect(() => {
+    setPage(1);
+  }, [debouncedSearch]);
 
   const { data, isLoading, isError } = useContent({
     page,
