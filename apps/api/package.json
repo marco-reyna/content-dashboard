@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
   },
   "keywords": [],
