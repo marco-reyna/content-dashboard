@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [20.x]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type check API
+        run: npx tsc --noEmit -p apps/api/tsconfig.json
+
+      - name: Type check Web
+        run: npx tsc --noEmit -p apps/web/tsconfig.app.json
+
+      - name: Run tests (web)
+        run: npm run test -w web -- --run
+
+      - name: Build API
+        run: npm run build -w api
+
+      - name: Build Web
+        run: npm run build -w web
