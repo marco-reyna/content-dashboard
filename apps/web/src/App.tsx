@@ -3,10 +3,11 @@ import { useContent } from './features/content/hooks/useContent';
 import { ContentList } from './features/content/components/ContentList';
 import { SearchInput } from './features/content/components/SearchInput';
 import { useDebounce } from './hooks/useDebounce';
+import { ErrorBoundary } from './features/content/components/ErrorBoundary';
 
 const LIMIT = 10;
 
-export default function App() {
+function App() {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState('');
 
@@ -54,5 +55,13 @@ export default function App() {
         </>
       )}
     </div>
+  );
+}
+
+export default function AppWithBoundary() {
+  return (
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   );
 }
