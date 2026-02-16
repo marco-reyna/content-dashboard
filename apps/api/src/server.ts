@@ -10,11 +10,15 @@ app.use(express.json());
 
 app.use('/api/content', contentRouter);
 
-app.listen(4000, () => {
-  console.log('API running on http://localhost:4000');
+// Global error middleware
+app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
+  console.error('Unhandled API error:', err);
+
+  res.status(500).json({
+    error: 'Internal Server Error',
+  });
 });
 
-app.use((err: unknown, _req: Request, res: Response, _next: NextFunction) => {
-  console.error(err);
-  res.status(500).json({ error: 'Internal Server Error' });
+app.listen(4000, () => {
+  console.log('API running on http://localhost:4000');
 });
