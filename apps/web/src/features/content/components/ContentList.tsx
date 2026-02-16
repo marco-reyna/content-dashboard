@@ -1,10 +1,14 @@
 import type { Content } from '@content-dashboard/shared';
 
 interface Props {
-  items: Content[];
+  items?: Content[];
 }
 
 export function ContentList({ items }: Props) {
+  if (!items || items.length === 0) {
+    return <p>No content available.</p>;
+  }
+
   return (
     <ul>
       {items.map((item) => (

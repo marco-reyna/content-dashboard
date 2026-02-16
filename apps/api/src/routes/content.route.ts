@@ -10,23 +10,27 @@ const querySchema = z.object({
   search: z.string().optional(),
 });
 
-router.get('/', (req, res) => {
-  const parsed = querySchema.safeParse(req.query);
+router.get('/', async (req, res, next) => {
+  try {
+    const parsed = querySchema.safeParse(req.query);
 
-  if (!parsed.success) {
-    return res.status(400).json({ error: 'Invalid query parameters' });
+    if (!parsed.success) {
+      return res.status(400).json({ error: 'Invalid query parameters' });
+    }
+
+    const page = Number(parsed.data.page) || 1;
+    const limit = Number(parsed.data.limit) || 10;
+
+    const result = await getContent({
+      page,
+      limit,
+      search: parsed.data.search,
+    });
+
+    res.json(result);
+  } catch (err) {
+    next(err);
   }
-
-  const page = Number(parsed.data.page) || 1;
-  const limit = Number(parsed.data.limit) || 10;
-
-  const result = getContent({
-    page,
-    limit,
-    search: parsed.data.search,
-  });
-
-  res.json(result);
 });
 
 export default router;
